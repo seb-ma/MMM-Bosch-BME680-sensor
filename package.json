@@ -1,0 +1,11 @@
+{
+  "name": "mmm-bosch-bme680-sensor",
+  "version": "1.0.0",
+  "description": "Retrieving and displaying data from a BME680 sensor",
+  "main": "MMM-Bosch-BME680-sensor.js",
+  "author": "Sébastien Mazzon",
+  "license": "MIT",
+  "dependencies": {
+    "bme680-sensor": "^1.0.1"
+  }
+}
