@@ -1,51 +1,51 @@
 {% if not nodata %}
-    <div class="container medium">
-        <!-- Temperature -->
-        <div class="sensor-temperature">
-            <span class="icon fas fa-home"></span>
-            <span>
-                {{ indoor.temperature | decimalSymbol }}°
-            </span>
-        </div>
+	<div class="container medium">
+		<!-- Temperature -->
+		<div class="sensor-temperature">
+			<span class="icon fas fa-home"></span>
+			<span>
+				{{ indoor.temperature | decimalSymbol }}°
+			</span>
+		</div>
 
-        <!-- Pressure -->
-        <div class="sensor-pressure">
-            <span class="icon fas fa-tachometer-alt"></span>
-            <span>{{ indoor.pressure | roundValue | decimalSymbol }}</span>
-            <span class="sensor-unit">hPa</span>
-        </div>
+		<!-- Pressure -->
+		<div class="sensor-pressure">
+			<span class="icon fas fa-tachometer-alt"></span>
+			<span>{{ indoor.pressure | roundValue | decimalSymbol }}</span>
+			<span class="sensor-unit">hPa</span>
+		</div>
 
-        <!-- Humidity -->
-        <div class="sensor-humidity">
-            <span class="icon fas fa-tint"></span>
-            <span>
-                {{ indoor.humidity | roundValue | decimalSymbol }}
-            </span>
-            <span class="sensor-unit">%</span>
-            {% if indoor.humidity < 40 or indoor.humidity > 60 %}
-                {% if indoor.humidity < 30 or indoor.humidity > 70 %}
-                    <sup class="icon fas fa-exclamation-triangle" />
-                {% else %}
-                    <sup class="icon fas fa-exclamation" />
-                {% endif %}
-            {% endif %}
-        </div>
+		<!-- Humidity -->
+		<div class="sensor-humidity">
+			<span class="icon fas fa-tint"></span>
+			<span>
+				{{ indoor.humidity | roundValue | decimalSymbol }}
+			</span>
+			<span class="sensor-unit">%</span>
+			{% if indoor.humidity < 40 or indoor.humidity > 60 %}
+				{% if indoor.humidity < 30 or indoor.humidity > 70 %}
+					<sup class="icon fas fa-exclamation-triangle" />
+				{% else %}
+					<sup class="icon fas fa-exclamation" />
+				{% endif %}
+			{% endif %}
+		</div>
 
-        <!-- IAQ -->
-        <div class="iaq-level">
-            <span class="icon fas fa-viruses"></span>
-            <span class="iaq-name">
-                {% set iaqLabel = "IAQ_" + indoor.iaq_level %}
-                {{ iaqLabel | translate }}
-            </span>
-            <span class="iaq-value">
-                {{ indoor.iaq | roundValue | decimalSymbol }}
-            </span>
-            <span class="sensor-unit">%</span>
-        </div>
-    </div>
+		<!-- IAQ -->
+		<div class="iaq-level">
+			<span class="icon fas fa-viruses"></span>
+			<span class="iaq-name">
+				{% set iaqLabel = "IAQ_" + indoor.iaq_level %}
+				{{ iaqLabel | translate }}
+			</span>
+			<span class="iaq-value">
+				{{ indoor.iaq | roundValue | decimalSymbol }}
+			</span>
+			<span class="sensor-unit">%</span>
+		</div>
+	</div>
 {% else %}
-    <div class="dimmed light small">
-        {{ "LOADING" | translate }}
-    </div>
+	<div class="dimmed light small">
+		{{ "LOADING" | translate }}
+	</div>
 {% endif %}

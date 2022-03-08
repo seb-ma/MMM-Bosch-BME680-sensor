@@ -8,7 +8,7 @@ It is designed for a Bosch BME680 sensor and retrieve:
 - pressure
 - IAQ
 
-It sends notifications that can be hendled by other modules and/or have its own display:
+It sends notifications that can be handled by other modules and/or have its own display:
 
 ![sample](images/sample.png)
 
@@ -17,20 +17,29 @@ It sends notifications that can be hendled by other modules and/or have its own 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
 ```js
 var config = {
-    modules: [
-        {
-            module: 'MMM-Bosch-BME680-sensor',
-            config: {
-                updateInterval: 60 * 1000, // 1 minute
-                decimalSymbol: ".",
+	modules: [
+		{
+			module: 'MMM-Bosch-BME680-sensor',
+			config: {
+				updateInterval: 60 * 1000, // 1 minute
+				decimalSymbol: ".",
 
-                mock: false,
-                i2cAddress: 0x76,
-                offsetTemperature: 0,
-            }
-        },
-    ]
+				mock: false,
+				i2cAddress: 0x76,
+				offsetTemperature: 0,
+			}
+		},
+	]
 }
+```
+
+## Installation
+
+```sh
+cd ~/MagicMirror/modules # Change path to modules directory of to your actual MagiMirror² installation
+git clone https://github.com/seb-ma/MMM-Bosch-BME680-sensor
+cd MMM-Bosch-BME680-sensor
+npm install --only=production
 ```
 
 ## Configuration options
@@ -50,15 +59,15 @@ To only have notifications sent (no display), don't set `position` for the modul
 
 When  data are retrieved, notifications are sent to other modules with payload containing related value:
 - `INDOOR_TEMPERATURE`
-    - payload: value of temperature in celcius
+	- payload: value of temperature in celcius
 - `INDOOR_HUMIDITY`
-    - payload: value of humidity in percentage
+	- payload: value of humidity in percentage
 - `INDOOR_PRESSURE`
-    - payload: value of pressure in hecto pascal
+	- payload: value of pressure in hecto pascal
 - `INDOOR_GAS`
-    - payload: value of gas resistance in ohm
+	- payload: value of gas resistance in ohm
 - `INDOOR_IAQ_LEVEL`
-    - payload: level of Air Quality from 0 to 5
-    - 0=Good, 1=Moderate, 2=Unhealthy for Sensitive Groups, 3=Unhealthy, 4=Very Unhealthy, 5=Hazardous
+	- payload: level of Air Quality from 0 to 5
+	- 0=Good, 1=Moderate, 2=Unhealthy for Sensitive Groups, 3=Unhealthy, 4=Very Unhealthy, 5=Hazardous
 - `INDOOR_IAQ`
-    - payload: value of Air Quality in percentage (100% = max healthy)
+	- payload: value of Air Quality in percentage (100% = max healthy)

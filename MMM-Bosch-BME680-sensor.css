@@ -7,24 +7,24 @@
  *
  */
 .MMM-Bosch-BME680-sensor .container {
-    display: block;
-    /*margin-inline-start: 4rem;*/
+	display: block;
+	/*margin-inline-start: 4rem;*/
 }
 
 .MMM-Bosch-BME680-sensor .sensor-unit {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
 .MMM-Bosch-BME680-sensor .iaq-value {
-    font-size: 1rem;
-    margin-inline-start: 0.5rem;
+	font-size: 1rem;
+	margin-inline-start: 0.5rem;
 }
 
 .MMM-Bosch-BME680-sensor .icon {
-    min-width: 2rem;
-    text-align: center;
+	min-width: 2rem;
+	text-align: center;
 }
 
 .MMM-Bosch-BME680-sensor span:not(.icon) {
-    color: var(--color-text-bright);
+	color: var(--color-text-bright);
 }
