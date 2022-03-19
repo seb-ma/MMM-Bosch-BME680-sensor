@@ -7,7 +7,7 @@
 
 const NodeHelper = require("node_helper");
 const Log = require("logger");
-const Bme680 = require("bme680-sensor");
+const { Bme680 } = require("bme680-sensor");
 
 module.exports = NodeHelper.create({
 

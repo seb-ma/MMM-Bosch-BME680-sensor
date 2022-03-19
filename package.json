@@ -1,10 +1,20 @@
 {
   "name": "mmm-bosch-bme680-sensor",
   "version": "1.0.0",
-  "description": "Retrieving and displaying data from a BME680 sensor",
+  "description": "This MagicMirror² module is designed for a Bosch BME680 sensor and can display temperature/humidity/pressure/IAQ.",
   "main": "MMM-Bosch-BME680-sensor.js",
   "author": "Sébastien Mazzon",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seb-ma/MMM-Bosch-BME680-sensor"
+  },
+  "keywords": [
+    "magic-mirror-modules",
+    "magicmirror2",
+    "bme680",
+    "indoor-sensors"
+  ],
   "dependencies": {
     "bme680-sensor": "^1.0.1"
   }

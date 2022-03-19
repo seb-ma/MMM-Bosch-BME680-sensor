@@ -15,6 +15,7 @@ It sends notifications that can be handled by other modules and/or have its own 
 ## Using the module
 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
+
 ```js
 var config = {
 	modules: [
@@ -51,7 +52,7 @@ To only have notifications sent (no display), don't set `position` for the modul
 | `updateInterval`    | *Optional* How often does the data needs to be retrieved? <br><br>**Type:** `int`(milliseconds) <br>Default: 60000 milliseconds (1 minute)
 | `animationSpeed`    | *Optional* Speed of the update animation. (Milliseconds) <br><br>**Type:** `int`(milliseconds) <br>Default: 1000 milliseconds (1 second)
 | `decimalSymbol`     | *Optional* Decimal separator <br><br>**Type:** `string` (`.` or `,`) <br>Default: "."
-| `offsetTemperature` | *Optional* Temperature offset to apply (usefull if sensor is near a processor) <br><br>**Type:** `float`(degree celsius) <br>Default: 0 degree
+| `offsetTemperature` | *Optional* Temperature offset to apply (useful if sensor is near a processor) <br><br>**Type:** `float`(degree celsius) <br>Default: 0 degree
 | `i2cAddress`        | *Optional* i²c address of BME680 sensor <br><br>**Type:** `int`(hexadecimal value) <br>Default: 0x76
 | `mock`              | *Optional* `true` to retrieve false data if no BME680 is plugged <br><br>**Type:** `boolean` <br>Default: `false`
 
