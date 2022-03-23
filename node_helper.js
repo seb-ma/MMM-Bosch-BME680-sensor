@@ -17,6 +17,7 @@ module.exports = NodeHelper.create({
 	initializeSensor: function(config) {
 		if (!this.config.mock) {
 			this.bme680 = new Bme680(1, this.config.i2cAddress);
+			this.bme680.initialize();
 			this.bme680.setTempOffset(this.config.offsetTemperature);
 			Log.log("BM680 initialized");
 		}
@@ -27,19 +28,20 @@ module.exports = NodeHelper.create({
 
 	},
 
-	update: async function () {
-		let data = {};
-		if (!this.config.mock) {
-			data = await this.bme680.getSensorData();
-		} else {
-			data = {temperature: 25.5, humidity: 33.3, pressure: 1000.5, gas_resistance: 100000};
-		}
-		data.iaq = this.computeIAQ(data);
-		data.iaq_level = this.getIAQLevel(data.iaq);
-		Log.log("Data retrieved", data);
-		this.sendSocketNotification("DATA", data);
+	update: function () {
+		(async () => {
+			let data = {};
+			if (!this.config.mock) {
+				data = await this.bme680.getSensorData();
+			} else {
+				data.data = {temperature: 25.5, humidity: 33.3, pressure: 1000.5, gas_resistance: 100000};
+			}
+			data.data.iaq = this.computeIAQ(data.data);
+			data.data.iaq_level = this.getIAQLevel(data.data.iaq);
+			Log.debug("Data retrieved", data);
+			this.sendSocketNotification("DATA", data.data);
+		})();
 	},
-
 
 	// from https://github.com/G6EJD/BME680-Example/blob/master/ESP32_bme680_CC_demo_03.ino
 	computeIAQ: function (data) {
@@ -81,6 +83,9 @@ module.exports = NodeHelper.create({
 
 	// 0 : Good to 5 : worst
 	getIAQLevel: function(iaq) {
+		if (typeof iaq !== 'number') {
+			return undefined;
+		}
 		if (iaq > 90) {
 			return 0; // "Good"
 		} else if (iaq > 70) {
@@ -92,7 +97,7 @@ module.exports = NodeHelper.create({
 		} else if (iaq > 40) {
 			return 4; // "Very Unhealthy"
 		}
-		return 5;  // "Hazardous"
+		return 5; // "Hazardous"
 	},
 
 	// Override socketNotificationReceived method.
@@ -103,8 +108,8 @@ module.exports = NodeHelper.create({
 				this.initializeSensor();	
 			} else {
 				Log.info("BM680 is already initialized");
+				this.update();
 			}
-			this.update();
 		}
 	},
 
