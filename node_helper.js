@@ -14,7 +14,7 @@ module.exports = NodeHelper.create({
 	bme680: undefined,
 	isInitialized: false,
 
-	initializeSensor: function(config) {
+	initializeSensor: function (config) {
 		if (!this.config.mock) {
 			this.bme680 = new Bme680(1, this.config.i2cAddress);
 			this.bme680.initialize();
@@ -34,7 +34,7 @@ module.exports = NodeHelper.create({
 			if (!this.config.mock) {
 				data = await this.bme680.getSensorData();
 			} else {
-				data.data = {temperature: 25.5, humidity: 33.3, pressure: 1000.5, gas_resistance: 100000};
+				data.data = { temperature: 25.52, humidity: 33.3, pressure: 1000.5, gas_resistance: 100000 };
 			}
 			data.data.iaq = this.computeIAQ(data.data);
 			data.data.iaq_level = this.getIAQLevel(data.data.iaq);
@@ -50,9 +50,9 @@ module.exports = NodeHelper.create({
 		let humidity_score, gas_score;
 
 		// Calculate humidity contribution to IAQ index
-		const  current_humidity = data.humidity;
+		const current_humidity = data.humidity;
 		const hum_reference = 40.0;
-		const hum_tolerance = hum_reference * 0.05 ;
+		const hum_tolerance = hum_reference * 0.05;
 		if (current_humidity >= hum_reference - hum_tolerance && current_humidity <= hum_reference + hum_tolerance) { // Humidity +/-5% around optimum
 			humidity_score = hum_weighting * 100;
 		} else { // Humidity is sub-optimal
@@ -64,7 +64,7 @@ module.exports = NodeHelper.create({
 		}
 
 		// Calculate gas contribution to IAQ index
-		const  gas_reference = data.gas_resistance;
+		const gas_reference = data.gas_resistance;
 		// values from experimentation
 		const gas_lower_limit = 10000;  // Bad air quality limit
 		const gas_upper_limit = 300000; // Good air quality limit
@@ -82,8 +82,8 @@ module.exports = NodeHelper.create({
 	},
 
 	// 0 : Good to 5 : worst
-	getIAQLevel: function(iaq) {
-		if (typeof iaq !== 'number') {
+	getIAQLevel: function (iaq) {
+		if (typeof iaq !== "number") {
 			return undefined;
 		}
 		if (iaq > 90) {
@@ -101,11 +101,11 @@ module.exports = NodeHelper.create({
 	},
 
 	// Override socketNotificationReceived method.
-	socketNotificationReceived: function(notification, payload) {
+	socketNotificationReceived: function (notification, payload) {
 		if (notification === "CONFIG") {
 			if (!this.isInitialized) {
-				this.config = payload;	
-				this.initializeSensor();	
+				this.config = payload;
+				this.initializeSensor();
 			} else {
 				Log.info("BM680 is already initialized");
 				this.update();

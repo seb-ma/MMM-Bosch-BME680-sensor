@@ -6,13 +6,9 @@
  * MIT Licensed.
  *
  */
-.MMM-Bosch-BME680-sensor .container {
-	display: block;
-	/*margin-inline-start: 4rem;*/
-}
-
 .MMM-Bosch-BME680-sensor .sensor-unit {
 	font-size: 1rem;
+	padding-inline-end: 1rem;
 }
 
 .MMM-Bosch-BME680-sensor .iaq-value {
@@ -20,11 +16,13 @@
 	margin-inline-start: 0.5rem;
 }
 
-.MMM-Bosch-BME680-sensor .icon {
-	min-width: 2rem;
-	text-align: center;
-}
-
 .MMM-Bosch-BME680-sensor span:not(.icon) {
 	color: var(--color-text-bright);
+}
+
+.MMM-Bosch-BME680-sensor .icon {
+	font-size: 75%;
+	line-height: 65px;
+	display: inline-block;
+	transform: translate(0, -3px);
 }

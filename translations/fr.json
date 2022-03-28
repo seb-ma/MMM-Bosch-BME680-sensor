@@ -1,11 +1,11 @@
 {
-  "TITLE": "Sonde",
-  "UPDATE": "Actualisation",
+	"TITLE": "Sonde",
+	"UPDATE": "Actualisation",
 
-  "IAQ_0": "Bon",
-  "IAQ_1": "Correct",
-  "IAQ_2": "Assez mauvais",
-  "IAQ_3": "Mauvais",
-  "IAQ_4": "Très mauvais",
-  "IAQ_5": "Dangereux"
+	"IAQ_0": "Bon",
+	"IAQ_1": "Correct",
+	"IAQ_2": "Assez mauvais",
+	"IAQ_3": "Mauvais",
+	"IAQ_4": "Très mauvais",
+	"IAQ_5": "Dangereux"
 }

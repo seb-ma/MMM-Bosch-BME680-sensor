@@ -1,11 +1,11 @@
 {
-  "TITLE": "Probe",
-  "UPDATE": "Update",
+	"TITLE": "Probe",
+	"UPDATE": "Update",
 
-  "IAQ_0": "Good",
-  "IAQ_1": "Moderate",
-  "IAQ_2": "Quite Unhealthy",
-  "IAQ_3": "Unhealthy",
-  "IAQ_4": "Very Unhealthy",
-  "IAQ_5": "Hazardous"
+	"IAQ_0": "Good",
+	"IAQ_1": "Moderate",
+	"IAQ_2": "Quite Unhealthy",
+	"IAQ_3": "Unhealthy",
+	"IAQ_4": "Very Unhealthy",
+	"IAQ_5": "Hazardous"
 }
