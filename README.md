@@ -20,7 +20,7 @@ To use this module, add the following configuration block to the modules array i
 var config = {
 	modules: [
 		{
-			module: 'MMM-Bosch-BME680-sensor',
+			module: "MMM-Bosch-BME680-sensor",
 			config: {
 				updateInterval: 60 * 1000, // 1 minute
 				decimalSymbol: ".",
