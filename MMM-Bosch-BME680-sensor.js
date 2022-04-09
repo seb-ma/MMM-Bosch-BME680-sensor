@@ -9,7 +9,7 @@ Module.register("MMM-Bosch-BME680-sensor", {
 	requiresVersion: "2.1.0", // Required version of MagicMirror
 
 	defaults: {
-		updateInterval: 60 * 1000, // 1 minute
+		updateInterval: 3 * 1000, // 3 seconds (this short timing seems needed to have an accurate Air Quality Index)
 		animationSpeed: 1000,
 		decimalSymbol: ".",
 		offsetTemperature: 0,

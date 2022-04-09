@@ -2,7 +2,7 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-It is designed for a Bosch BME680 sensor and retrieve:
+It is designed for a Bosch BME680 sensor connected with i²c and retrieve:
 - temperature
 - humidity
 - pressure
@@ -37,10 +37,48 @@ var config = {
 ## Installation
 
 ```sh
-cd ~/MagicMirror/modules # Change path to modules directory of to your actual MagiMirror² installation
+cd ~/MagicMirror/modules # Change path to modules directory of your actual MagiMirror² installation
 git clone https://github.com/seb-ma/MMM-Bosch-BME680-sensor
 cd MMM-Bosch-BME680-sensor
 npm install --only=production
+```
+
+### OS configuration related
+To access to sensor values, it is necessary to have i²c drivers activated and permissions to communicate with.
+
+**On Raspberry OS:**
+
+Activate i²c:
+
+```sh
+sudo raspi-config
+```
+
+Then, enable i²c:
+- Interfacing options
+- P5 I2C Enable / Disable automatic loading of the I2C kernel module
+
+And add your user in `i2c` group:
+
+```sh
+sudo adduser $USER i2c
+sudo adduser $USER gpio
+```
+
+This module has dependency `node-rpio`. Requirements must be followed (see https://github.com/jperkin/node-rpio):
+
+Add the following line to `/boot/config.txt` and reboot:
+
+```properties
+dtoverlay=gpio-no-irq
+```
+
+Enable `/dev/gpiomem` access:
+
+```sh
+cat >/etc/udev/rules.d/20-gpiomem.rules <<EOF
+SUBSYSTEM=="bcm2835-gpiomem", KERNEL=="gpiomem", GROUP="gpio", MODE="0660"
+EOF
 ```
 
 ## Configuration options
@@ -49,12 +87,12 @@ To only have notifications sent (no display), don't set `position` for the modul
 
 | Option              | Description
 |-------------------- |-------------
-| `updateInterval`    | *Optional* How often does the data needs to be retrieved? <br><br>**Type:** `int`(milliseconds) <br>Default: 60000 milliseconds (1 minute)
-| `animationSpeed`    | *Optional* Speed of the update animation. (Milliseconds) <br><br>**Type:** `int`(milliseconds) <br>Default: 1000 milliseconds (1 second)
-| `decimalSymbol`     | *Optional* Decimal separator <br><br>**Type:** `string` (`.` or `,`) <br>Default: "."
-| `offsetTemperature` | *Optional* Temperature offset to apply (useful if sensor is near a processor) <br><br>**Type:** `float`(degree celsius) <br>Default: 0 degree
-| `i2cAddress`        | *Optional* i²c address of BME680 sensor <br><br>**Type:** `int`(hexadecimal value) <br>Default: 0x76
-| `mock`              | *Optional* `true` to retrieve false data if no BME680 is plugged <br><br>**Type:** `boolean` <br>Default: `false`
+| `updateInterval`    | *Optional* How often does the data needs to be retrieved?<br><br>**Type:** `int` (milliseconds)<br>Default: 3000 milliseconds (3 seconds)<br>3 seconds is needed to have an accurate Air Quality Index (a longer interval will not be accurate for AQI)
+| `animationSpeed`    | *Optional* Speed of the update animation. (Milliseconds)<br><br>**Type:** `int` (milliseconds)<br>Default: 1000 milliseconds (1 second)
+| `decimalSymbol`     | *Optional* Decimal separator<br><br>**Type:** `string` ("." or ",")<br>Default: "."
+| `offsetTemperature` | *Optional* Temperature offset to apply (useful if sensor is near a processor)<br><br>**Type:** `float` (degree celsius)<br>Default: 0 degree
+| `i2cAddress`        | *Optional* i²c address of BME680 sensor<br><br>**Type:** `int` (hexadecimal value)<br>Default: 0x76
+| `mock`              | *Optional* `true` to retrieve false data if no BME680 is plugged<br><br>**Type:** `boolean`<br>Default: `false`
 
 ## Sent notifications
 
