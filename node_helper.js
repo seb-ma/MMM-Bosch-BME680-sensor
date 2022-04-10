@@ -34,7 +34,7 @@ module.exports = NodeHelper.create({
 			if (!this.config.mock) {
 				data = await this.bme680.getSensorData();
 			} else {
-				data.data = { temperature: 25.52, humidity: 33.3, pressure: 1000.5, gas_resistance: 100000 };
+				data.data = { temperature: 25.52, humidity: 33.3, pressure: 1000.5, gas_resistance: 30000 };
 			}
 			data.data.iaq = this.computeIAQ(data.data);
 			data.data.iaq_level = this.getIAQLevel(data.data.iaq);
@@ -66,12 +66,8 @@ module.exports = NodeHelper.create({
 		// Calculate gas contribution to IAQ index
 		const gas_reference = data.gas_resistance;
 		// values from experimentation
-		const gas_lower_limit = 10000;  // Bad air quality limit
-		const gas_upper_limit = 300000; // Good air quality limit
-
-		// values from Bosch specs?
-		//const gas_lower_limit = 5000;   // Bad air quality limit
-		//const gas_upper_limit = 50000;  // Good air quality limit 
+		const gas_lower_limit = this.config.gasLimitLow;  // Bad air quality limit
+		const gas_upper_limit = this.config.gasLimitHigh; // Good air quality limit
 
 		gas_score = (gas_weighting / (gas_upper_limit - gas_lower_limit) * gas_reference - (gas_lower_limit * (gas_weighting / (gas_upper_limit - gas_lower_limit)))) * 100.00;
 		if (gas_score > 75) gas_score = 75; // Sometimes gas readings can go outside of expected scale maximum

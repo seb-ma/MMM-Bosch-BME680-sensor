@@ -12,10 +12,12 @@ Module.register("MMM-Bosch-BME680-sensor", {
 		updateInterval: 3 * 1000, // 3 seconds (this short timing seems needed to have an accurate Air Quality Index)
 		animationSpeed: 1000,
 		decimalSymbol: ".",
-		offsetTemperature: 0,
 
-		i2cAddress: 0x76,
 		mock: false,
+		i2cAddress: 0x76,
+		offsetTemperature: 0,
+		gasLimitLow: 5000, // Bad air quality limit (values from Bosch specs)
+		gasLimitHigh: 50000, // Good air quality limit (values from Bosch specs)
 	},
 
 	start: function () {
@@ -58,7 +60,7 @@ Module.register("MMM-Bosch-BME680-sensor", {
 		this.sendNotification("INDOOR_IAQ", data.iaq);
 
 		this.dataSensors = data;
-		this.updateDom(self.config.animationSpeed);
+		this.updateDom(this.config.animationSpeed);
 	},
 
 	// socketNotificationReceived from helper

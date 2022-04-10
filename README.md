@@ -23,11 +23,14 @@ var config = {
 			module: "MMM-Bosch-BME680-sensor",
 			config: {
 				updateInterval: 60 * 1000, // 1 minute
+				animationSpeed: 1000,
 				decimalSymbol: ".",
 
 				mock: false,
 				i2cAddress: 0x76,
 				offsetTemperature: 0,
+				gasLimitLow: 5000, // Bad air quality limit (values from Bosch specs)
+				gasLimitHigh: 50000, // Good air quality limit (values from Bosch specs)
 			}
 		},
 	]
@@ -90,9 +93,11 @@ To only have notifications sent (no display), don't set `position` for the modul
 | `updateInterval`    | *Optional* How often does the data needs to be retrieved?<br><br>**Type:** `int` (milliseconds)<br>Default: 3000 milliseconds (3 seconds)<br>3 seconds is needed to have an accurate Air Quality Index (a longer interval will not be accurate for AQI)
 | `animationSpeed`    | *Optional* Speed of the update animation. (Milliseconds)<br><br>**Type:** `int` (milliseconds)<br>Default: 1000 milliseconds (1 second)
 | `decimalSymbol`     | *Optional* Decimal separator<br><br>**Type:** `string` ("." or ",")<br>Default: "."
-| `offsetTemperature` | *Optional* Temperature offset to apply (useful if sensor is near a processor)<br><br>**Type:** `float` (degree celsius)<br>Default: 0 degree
-| `i2cAddress`        | *Optional* i²c address of BME680 sensor<br><br>**Type:** `int` (hexadecimal value)<br>Default: 0x76
+degree
 | `mock`              | *Optional* `true` to retrieve false data if no BME680 is plugged<br><br>**Type:** `boolean`<br>Default: `false`
+| `i2cAddress`        | *Optional* i²c address of BME680 sensor<br><br>**Type:** `int` (hexadecimal value)<br>Default: 0x76
+| `offsetTemperature` | *Optional* Temperature offset to apply (useful if sensor is near a processor)<br><br>**Type:** `float` (degree celsius)<br>Default: 0 | `gasLimitLow`       | *Optional* Bad air quality limit<br><br>**Type:** `int`<br>Default: 5000 (from Bosch specs)
+| `gasLimitHigh`      | *Optional* Good air quality limit<br><br>**Type:** `int`<br>Default: 50000 (from Bosch specs)
 
 ## Sent notifications
 
