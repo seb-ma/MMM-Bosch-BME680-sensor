@@ -1,14 +1,14 @@
-{% if not nodata %}
+{% if indoor %}
 	<div class="normal medium">
 		<!-- Pressure -->
 		<span class="icon fas fa-tachometer-alt"></span>
-		<span>{{ indoor.pressure | roundValue | decimalSymbol }}</span>
+		<span>{{ indoor.pressure | round | decimalSymbol }}</span>
 		<span class="sensor-unit">hPa</span>
 
 		<!-- Humidity -->
 		<span class="icon fas fa-tint"></span>
 		<span>
-			{{ indoor.humidity | roundValue | decimalSymbol }}
+			{{ indoor.humidity | round | decimalSymbol }}
 		</span>
 		<span class="sensor-unit">%</span>
 		{% if indoor.humidity < 40 or indoor.humidity > 60 %}
@@ -34,7 +34,7 @@
 			{{ iaqLabel | translate }}
 		</span>
 		<span class="iaq-value">
-			{{ indoor.iaq | roundValue | decimalSymbol }}
+			{{ indoor.iaq | round | decimalSymbol }}
 		</span>
 		<span class="sensor-unit">%</span>
 	</div>

@@ -22,25 +22,31 @@ module.exports = NodeHelper.create({
 			Log.log("BM680 initialized");
 		}
 		isInitialized = true;
-		this.intervalUpdate = setInterval(() => {
-			this.update();
-		}, this.config.updateInterval);
-
+		this.scheduleUpdate(0);
 	},
 
-	update: function () {
-		(async () => {
-			let data = {};
-			if (!this.config.mock) {
-				data = await this.bme680.getSensorData();
-			} else {
-				data.data = { temperature: 25.52, humidity: 33.3, pressure: 1000.5, gas_resistance: 30000 };
-			}
-			data.data.iaq = this.computeIAQ(data.data);
-			data.data.iaq_level = this.getIAQLevel(data.data.iaq);
-			Log.debug("Data retrieved", data);
-			this.sendSocketNotification("DATA", data.data);
-		})();
+	scheduleUpdate: function (delay = null) {
+		let nextLoad = this.config.updateInterval;
+		if (delay !== null && delay >= 0) {
+			nextLoad = delay;
+		}
+		setTimeout(() => {
+			this.update()
+			.then(this.scheduleUpdate());
+		}, nextLoad);
+	},
+
+	update: async function () {
+		let data = {};
+		if (!this.config.mock) {
+			data = await this.bme680.getSensorData();
+		} else {
+			data.data = { temperature: 25.52, humidity: 33.3, pressure: 1000.5, gas_resistance: 30000 };
+		}
+		data.data.iaq = this.computeIAQ(data.data);
+		data.data.iaq_level = this.getIAQLevel(data.data.iaq);
+		Log.debug("Data retrieved", data);
+		this.sendSocketNotification("DATA", data.data);
 	},
 
 	// from https://github.com/G6EJD/BME680-Example/blob/master/ESP32_bme680_CC_demo_03.ino

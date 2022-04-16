@@ -27,11 +27,11 @@ Module.register("MMM-Bosch-BME680-sensor", {
 		this.sendSocketNotification("CONFIG", this.config);
 	},
 
-	getTemplate() {
+	getTemplate: function () {
 		return `${this.name}.njk`;
 	},
 
-	getStyles() {
+	getStyles: function () {
 		return [`${this.name}.css`];
 	},
 
@@ -47,11 +47,11 @@ Module.register("MMM-Bosch-BME680-sensor", {
 		if (this.dataSensors !== undefined) {
 			return { indoor: this.dataSensors };
 		} else {
-			return { nodata: true };
+			return { };
 		}
 	},
 
-	processData: async function (data) {
+	processData: function (data) {
 		this.sendNotification("INDOOR_TEMPERATURE", data.temperature);
 		this.sendNotification("INDOOR_HUMIDITY", data.humidity);
 		this.sendNotification("INDOOR_PRESSURE", data.pressure);
@@ -70,21 +70,13 @@ Module.register("MMM-Bosch-BME680-sensor", {
 		}
 	},
 
-	addFilters() {
-		this.nunjucksEnvironment().addFilter(
-			"roundValue",
-			function (value) {
-				const roundValue = parseFloat(value).toFixed(0);
-				return roundValue === "-0" ? 0 : roundValue;
-			}.bind(this)
-		);
-
+	addFilters: function () {
 		this.nunjucksEnvironment().addFilter(
 			"roundValue1dec",
 			function (value) {
 				const roundValue = parseFloat(value).toFixed(1);
 				return roundValue === "-0" ? 0 : roundValue;
-			}.bind(this)
+			}
 		);
 
 		this.nunjucksEnvironment().addFilter(
