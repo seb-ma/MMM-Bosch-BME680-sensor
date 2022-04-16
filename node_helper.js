@@ -19,10 +19,10 @@ module.exports = NodeHelper.create({
 			this.bme680 = new Bme680(1, this.config.i2cAddress);
 			this.bme680.initialize();
 			this.bme680.setTempOffset(this.config.offsetTemperature);
-			Log.log("BM680 initialized");
 		}
-		isInitialized = true;
-		this.scheduleUpdate(0);
+		this.isInitialized = true;
+		Log.log("BM680 initialized");
+		this.scheduleUpdate(0);	
 	},
 
 	scheduleUpdate: function (delay = null) {
@@ -32,7 +32,7 @@ module.exports = NodeHelper.create({
 		}
 		setTimeout(() => {
 			this.update()
-			.then(this.scheduleUpdate());
+				.finally(this.scheduleUpdate());
 		}, nextLoad);
 	},
 
