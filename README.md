@@ -43,7 +43,18 @@ var config = {
 cd ~/MagicMirror/modules # Change path to modules directory of your actual MagiMirror² installation
 git clone https://github.com/seb-ma/MMM-Bosch-BME680-sensor
 cd MMM-Bosch-BME680-sensor
+```
+
+If nodejs version is compliant:
+
+```
 npm install --only=production
+```
+
+Else, a full install + rebuild dependency may be needed:
+
+```
+npm install; npm rebuild i2c-bus --update-binary
 ```
 
 ### OS configuration related
