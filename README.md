@@ -6,7 +6,7 @@ It is designed for a Bosch BME680 sensor connected with i²c and retrieve:
 - temperature
 - humidity
 - pressure
-- IAQ
+- AQI
 
 It sends notifications that can be handled by other modules and/or have its own display:
 
@@ -88,16 +88,17 @@ EOF
 
 To only have notifications sent (no display), don't set `position` for the module.
 
-| Option              | Description
-|-------------------- |-------------
-| `updateInterval`    | *Optional* How often does the data needs to be retrieved?<br><br>**Type:** `int` (milliseconds)<br>Default: 3000 milliseconds (3 seconds)<br>3 seconds is needed to have an accurate Air Quality Index (a longer interval will not be accurate for AQI)
-| `animationSpeed`    | *Optional* Speed of the update animation. (Milliseconds)<br><br>**Type:** `int` (milliseconds)<br>Default: 1000 milliseconds (1 second)
-| `decimalSymbol`     | *Optional* Decimal separator<br><br>**Type:** `string` ("." or ",")<br>Default: "."
+| Option				| Description
+|---------------------- |-------------
+| `updateInterval`		| *Optional* How often does the data needs to be retrieved?<br><br>**Type:** `int` (milliseconds)<br>Default: 3000 milliseconds (3 seconds)<br>3 seconds is needed to have an accurate Air Quality Index (a longer interval will not be accurate for AQI)
+| `animationSpeed`		| *Optional* Speed of the update animation. (Milliseconds)<br><br>**Type:** `int` (milliseconds)<br>Default: 1000 milliseconds (1 second)
+| `decimalSymbol`		| *Optional* Decimal separator<br><br>**Type:** `string` ("." or ",")<br>Default: "."
 degree
-| `mock`              | *Optional* `true` to retrieve false data if no BME680 is plugged<br><br>**Type:** `boolean`<br>Default: `false`
-| `i2cAddress`        | *Optional* i²c address of BME680 sensor<br><br>**Type:** `int` (hexadecimal value)<br>Default: 0x76
-| `offsetTemperature` | *Optional* Temperature offset to apply (useful if sensor is near a processor)<br><br>**Type:** `float` (degree celsius)<br>Default: 0 | `gasLimitLow`       | *Optional* Bad air quality limit<br><br>**Type:** `int`<br>Default: 5000 (from Bosch specs)
-| `gasLimitHigh`      | *Optional* Good air quality limit<br><br>**Type:** `int`<br>Default: 50000 (from Bosch specs)
+| `mock`				| *Optional* `true` to retrieve false data if no BME680 is plugged<br><br>**Type:** `boolean`<br>Default: `false`
+| `i2cAddress`			| *Optional* i²c address of BME680 sensor<br><br>**Type:** `int` (hexadecimal value)<br>Default: 0x76
+| `offsetTemperature`	| *Optional* Temperature offset to apply (useful if sensor is near a processor)<br><br>**Type:** `float` (degree celsius)<br>Default: 0
+| `gasLimitLow`			| *Optional* Bad air quality limit<br><br>**Type:** `int`<br>Default: 5000 (from Bosch specs)
+| `gasLimitHigh`		| *Optional* Good air quality limit<br><br>**Type:** `int`<br>Default: 50000 (from Bosch specs)
 
 ## Sent notifications
 
@@ -110,8 +111,8 @@ When  data are retrieved, notifications are sent to other modules with payload c
 	- payload: value of pressure in hecto pascal
 - `INDOOR_GAS`
 	- payload: value of gas resistance in ohm
-- `INDOOR_IAQ_LEVEL`
+- `INDOOR_AQI_LEVEL`
 	- payload: level of Air Quality from 0 to 5
 	- 0=Good, 1=Moderate, 2=Unhealthy for Sensitive Groups, 3=Unhealthy, 4=Very Unhealthy, 5=Hazardous
-- `INDOOR_IAQ`
+- `INDOOR_AQI`
 	- payload: value of Air Quality in percentage (100% = max healthy)

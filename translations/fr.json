@@ -2,10 +2,10 @@
 	"TITLE": "Sonde",
 	"UPDATE": "Actualisation",
 
-	"IAQ_0": "Bon",
-	"IAQ_1": "Correct",
-	"IAQ_2": "Assez mauvais",
-	"IAQ_3": "Mauvais",
-	"IAQ_4": "Très mauvais",
-	"IAQ_5": "Dangereux"
+	"AQI_0": "Bon",
+	"AQI_1": "Correct",
+	"AQI_2": "Assez mauvais",
+	"AQI_3": "Mauvais",
+	"AQI_4": "Très mauvais",
+	"AQI_5": "Dangereux"
 }

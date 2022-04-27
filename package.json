@@ -10,7 +10,7 @@
     "url": "git+https://github.com/seb-ma/MMM-Bosch-BME680-sensor"
   },
   "keywords": [
-    "magic-mirror-modules",
+    "magicmirror-module",
     "magicmirror2",
     "bme680",
     "indoor-sensors"

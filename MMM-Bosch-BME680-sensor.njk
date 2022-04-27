@@ -27,14 +27,14 @@
 		</span>
 	</div>
 	<div class="normal medium">
-		<!-- IAQ -->
+		<!-- AQI -->
 		<span class="icon fas fa-viruses"></span>
-		<span class="iaq-name">
-			{% set iaqLabel = "IAQ_" + indoor.iaq_level %}
-			{{ iaqLabel | translate }}
+		<span class="aqi-name">
+			{% set aqiLabel = "AQI_" + indoor.aqi_level %}
+			{{ aqiLabel | translate }}
 		</span>
-		<span class="iaq-value">
-			{{ indoor.iaq | round | decimalSymbol }}
+		<span class="aqi-value">
+			{{ indoor.aqi | round | decimalSymbol }}
 		</span>
 		<span class="sensor-unit">%</span>
 	</div>

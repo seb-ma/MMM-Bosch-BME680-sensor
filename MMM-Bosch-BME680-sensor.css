@@ -1,17 +1,17 @@
-/*
- *
- * MMM-Bosch-BME680-sensor
- *
- * Sébastien Mazzon
- * MIT Licensed.
- *
+/**
+ * This MagicMirror² module is designed for a Bosch BME680 sensor and can display temperature/humidity/pressure/IAQ.
+ * @module MMM-Bosch-BME680-sensor
+ * @see `README.md`
+ * @author Sébastien Mazzon
+ * @license MIT - @see `LICENCE.txt`
  */
-.MMM-Bosch-BME680-sensor .sensor-unit {
+
+ .MMM-Bosch-BME680-sensor .sensor-unit {
 	font-size: 1rem;
 	padding-inline-end: 1rem;
 }
 
-.MMM-Bosch-BME680-sensor .iaq-value {
+.MMM-Bosch-BME680-sensor .aqi-value {
 	font-size: 1rem;
 	margin-inline-start: 0.5rem;
 }
