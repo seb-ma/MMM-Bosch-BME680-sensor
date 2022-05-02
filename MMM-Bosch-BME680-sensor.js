@@ -99,8 +99,10 @@ Module.register("MMM-Bosch-BME680-sensor", {
 
 		// Store data into module
 		this.dataSensors = data;
-		// Update DOM
-		this.updateDom(this.config.animationSpeed);
+		// Update DOM (only if module is visible)
+		if (!this.hidden) {
+			this.updateDom(this.config.animationSpeed);
+		}
 	},
 
 	/**
