@@ -21,16 +21,18 @@
 		<span class="icon fas fa-home"></span>
 		<span>{{ indoor.temperature | roundValue1dec | decimalSymbol }}°</span>
 	</div>
-	<div class="normal medium">
-		<!-- AQI -->
-		<span class="icon fas fa-viruses"></span>
-		<span class="aqi-name">
-			{% set aqiLabel = "AQI_" + indoor.aqi_level %}
-			{{ aqiLabel | translate }}
-		</span>
-		<span class="aqi-value">{{ indoor.aqi | round | decimalSymbol }}</span>
-		<span class="sensor-unit">%</span>
-	</div>
+	{% if config.showAqiAtLevel <= indoor.aqi_level %}
+		<div class="normal medium">
+			<!-- AQI -->
+			<span class="icon fas fa-viruses"></span>
+			<span class="aqi-name">
+				{% set aqiLabel = "AQI_" + indoor.aqi_level %}
+				{{ aqiLabel | translate }}
+			</span>
+			<span class="aqi-value">{{ indoor.aqi | round | decimalSymbol }}</span>
+			<span class="sensor-unit">%</span>
+		</div>
+	{% endif %}
 {% else %}
 	<div class="dimmed light small">{{ "LOADING" | translate }}</div>
 {% endif %}

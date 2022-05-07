@@ -22,9 +22,10 @@ var config = {
 		{
 			module: "MMM-Bosch-BME680-sensor",
 			config: {
-				updateInterval: 60 * 1000, // 1 minute
+				updateInterval: 30 * 1000, // 1 minute
 				animationSpeed: 1000,
 				decimalSymbol: ".",
+				showAqiAtLevel: 0, // Show Air Quality only if AQI is worst or equals to a level (0 to always displaying, undefined to never displaying)
 
 				mock: false,
 				i2cAddress: 0x76,
@@ -36,6 +37,8 @@ var config = {
 	]
 }
 ```
+
+Nota: `gasLimitLow` and `gasLimitHigh` must be adjusted by experimentation.
 
 ## Installation
 
@@ -104,7 +107,7 @@ To only have notifications sent (no display), don't set `position` for the modul
 | `updateInterval`		| *Optional* How often does the data needs to be retrieved?<br><br>**Type:** `int` (milliseconds)<br>Default: 3000 milliseconds (3 seconds)<br>3 seconds is needed to have an accurate Air Quality Index (a longer interval will not be accurate for AQI)
 | `animationSpeed`		| *Optional* Speed of the update animation. (Milliseconds)<br><br>**Type:** `int` (milliseconds)<br>Default: 1000 milliseconds (1 second)
 | `decimalSymbol`		| *Optional* Decimal separator<br><br>**Type:** `string` ("." or ",")<br>Default: "."
-degree
+| `showAqiAtLevel`		| *Optional* Show Air Quality only if AQI is worst or equals to a level<br>Levels are: 0=Good, 1=Moderate, 2=Unhealthy for Sensitive Groups, 3=Unhealthy, 4=Very Unhealthy, 5=Hazardous<br>(`0` to always displaying, `undefined` to never displaying)<br><br>**Type:** `integer`<br>Default: `0`
 | `mock`				| *Optional* `true` to retrieve false data if no BME680 is plugged<br><br>**Type:** `boolean`<br>Default: `false`
 | `i2cAddress`			| *Optional* i²c address of BME680 sensor<br><br>**Type:** `int` (hexadecimal value)<br>Default: 0x76
 | `offsetTemperature`	| *Optional* Temperature offset to apply (useful if sensor is near a processor)<br><br>**Type:** `float` (degree celsius)<br>Default: 0

@@ -17,9 +17,10 @@ Module.register("MMM-Bosch-BME680-sensor", {
 	 */
 	defaults: {
 		/* Display configuration */
-		updateInterval: 3 * 1000,	// 3 seconds (this short timing seems needed to have an accurate Air Quality Index)
+		updateInterval: 30 * 1000,
 		animationSpeed: 1000,
 		decimalSymbol: ".",			// Symbol of decimal separator
+		showAqiAtLevel: 0,			// Show Air Quality only if AQI is worst or equals to a level (0 to always displaying, undefined to never displaying)
 
 		/* Driver configuration */
 		mock: false,				// Use a true BME680 sensor or mock data?
@@ -56,7 +57,10 @@ Module.register("MMM-Bosch-BME680-sensor", {
 	 * @returns {indoor: {temperature: float, humidity: float, pressure: float, gas_resistance: float, aqi: integer, aqi_level: float}} or {} if no data
 	 */
 	getTemplateData: function () {
-		return (this.dataSensors !== undefined) ? { indoor: this.dataSensors } : {};
+		return {
+			config: this.config,
+			indoor: this.dataSensors,
+		};
 	},
 
 	/**
