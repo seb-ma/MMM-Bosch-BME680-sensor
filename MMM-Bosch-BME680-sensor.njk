@@ -1,36 +1,43 @@
 {% if indoor %}
 	<div class="normal medium">
 		<!-- Pressure -->
-		<span class="icon fas fa-tachometer-alt"></span>
-		<span>{{ indoor.pressure | round | decimalSymbol }}</span>
-		<span class="sensor-unit">hPa</span>
-
+		<span class="indoor-pressure">
+			<span class="icon fas fa-tachometer-alt"></span>
+			<span>{{ indoor.pressure | round | decimalSymbol }}</span>
+			<span class="sensor-unit">hPa</span>
+		</span>
 		<!-- Humidity -->
-		{% if indoor.humidity < 40 or indoor.humidity > 60 %}
-			{% if indoor.humidity < 30 or indoor.humidity > 70 %}
-				<span class="icon fas fa-exclamation-triangle"></span>
-			{% else %}
-				<span class="icon fas fa-exclamation"></span>
+		<span class="indoor-humidity">
+			{% if indoor.humidity < 40 or indoor.humidity > 60 %}
+				{% if indoor.humidity < 30 or indoor.humidity > 70 %}
+					<span class="icon fas fa-exclamation-triangle"></span>
+				{% else %}
+					<span class="icon fas fa-exclamation"></span>
+				{% endif %}
 			{% endif %}
-		{% endif %}
-		<span>{{ indoor.humidity | round | decimalSymbol }}</span>
-		<sup class="wi wi-humidity humidityIcon"></sup>
+			<span>{{ indoor.humidity | round | decimalSymbol }}</span>
+			<sup class="wi wi-humidity humidityIcon"></sup>
+		</span>
 	</div>
 	<div class="large light">
 		<!-- Temperature -->
-		<span class="icon fas fa-home"></span>
-		<span>{{ indoor.temperature | roundValue1dec | decimalSymbol }}°</span>
+		<span class="indoor-temperature">
+			<span class="icon fas fa-home"></span>
+			<span>{{ indoor.temperature | roundValue1dec | decimalSymbol }}°</span>
+		</span>
 	</div>
 	{% if config.showAqiAtLevel <= indoor.aqi_level %}
 		<div class="normal medium">
 			<!-- AQI -->
-			<span class="icon fas fa-viruses"></span>
-			<span class="aqi-name">
-				{% set aqiLabel = "AQI_" + indoor.aqi_level %}
-				{{ aqiLabel | translate }}
+			<span class="indoor-aqi">
+				<span class="icon fas fa-viruses"></span>
+				<span class="aqi-name">
+					{% set aqiLabel = "AQI_" + indoor.aqi_level %}
+					{{ aqiLabel | translate }}
+				</span>
+				<span class="aqi-value">{{ indoor.aqi | round | decimalSymbol }}</span>
+				<span class="sensor-unit">%</span>
 			</span>
-			<span class="aqi-value">{{ indoor.aqi | round | decimalSymbol }}</span>
-			<span class="sensor-unit">%</span>
 		</div>
 	{% endif %}
 {% else %}
