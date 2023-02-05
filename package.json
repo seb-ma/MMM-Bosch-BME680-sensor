@@ -17,5 +17,10 @@
 	],
 	"dependencies": {
 		"bme680-sensor": "^1.1.0"
+	},
+	"overrides": {
+		"i2c-bus": {
+			"nan": "^2.17.0"
+		}
 	}
 }
