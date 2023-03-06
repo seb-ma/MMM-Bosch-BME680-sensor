@@ -2,7 +2,7 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-It is designed for a Bosch BME680 sensor connected with i²c and retrieve:
+It is designed for a Bosch BME680 sensor connected with i²c and retrieves:
 - temperature
 - humidity
 - pressure
