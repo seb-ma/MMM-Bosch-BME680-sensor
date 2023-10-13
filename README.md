@@ -51,13 +51,13 @@ cd MMM-Bosch-BME680-sensor
 If nodejs version is compliant:
 
 ```
-npm install --only=production
+npm install --no-audit --no-fund --no-update-notifier --only=prod --omit=dev
 ```
 
 Else, a full install + rebuild dependency may be needed:
 
 ```
-npm install; npm rebuild i2c-bus --update-binary
+npm install --no-audit --no-fund --no-update-notifier ; npm rebuild i2c-bus --update-binary
 ```
 
 ### OS configuration related
