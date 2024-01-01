@@ -43,6 +43,15 @@ Module.register("MMM-Bosch-BME680-sensor", {
 	},
 
 	/**
+	 * Returns the title of the module
+	 * @see <https://docs.magicmirror.builders/development/core-module-file.html#getheader>
+	 * @returns {string}
+	 */
+	getHeader: function () {
+		return this.data.header || this.translate("TITLE");
+	},
+
+	/**
 	 * Returns the template file used by Nunjucks
 	 * @see `module.getTemplate`
 	 * @returns {string} Path to Nunjucks template file

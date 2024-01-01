@@ -31,6 +31,24 @@ module.exports = NodeHelper.create({
 	config: {},
 
 	/**
+	 * Starts the node helper of the module
+	 * @see `node_helper.start`
+	 * @see <https://docs.magicmirror.builders/development/node-helper.html#start>
+	 */
+	start: function () {
+		const self = this;
+		// Allows to get data sensors from url call using GET
+		this.expressApp.get("/bme680", function (req, res) {
+			Log.debug("URL request");
+			if (self.isInitialized && self.data) {
+				res.json(self.data);
+			} else {
+				res.sendStatus(503);
+			}
+		});
+	},
+
+	/**
 	 * Initializes BME680 driver
 	 * @param {*} config @see `MMM-Bosch-BME680-sensor.default`
 	 */
@@ -81,6 +99,7 @@ module.exports = NodeHelper.create({
 		data.data.aqi = this.computeAQI(data.data.humidity, data.data.gas_resistance);
 		data.data.aqi_level = this.getAQILevel(data.data.aqi);
 		// Send sensor data to module
+		this.data = data.data;
 		Log.debug("Data retrieved", data.data);
 		this.sendSocketNotification("DATA", data.data);
 	},

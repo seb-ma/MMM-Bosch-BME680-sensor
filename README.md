@@ -57,7 +57,7 @@ npm install --no-audit --no-fund --no-update-notifier --only=prod --omit=dev
 Else, a full install + rebuild dependency may be needed:
 
 ```
-npm install --no-audit --no-fund --no-update-notifier ; npm rebuild i2c-bus --update-binary
+npm install --no-audit --no-fund --no-update-notifier; npm rebuild i2c-bus --update-binary
 ```
 
 ### OS configuration related
@@ -130,3 +130,8 @@ When  data are retrieved, notifications are sent to other modules with payload c
 	- 0=Good, 1=Moderate, 2=Unhealthy for Sensitive Groups, 3=Unhealthy, 4=Very Unhealthy, 5=Hazardous
 - `INDOOR_AQI`
 	- payload: value of Air Quality in percentage (100% = max healthy)
+
+## ExpressApp
+
+API point is available to retrieve data sensor as json response.
+- Can be called by URL as GET request - ex: http://localhost:8080/bme680
